@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SiteSathi builds websites for Nepali businesses. Your business, online.">
+<title>SiteSathi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Sora:wght@300;400;600&family=Permanent+Marker&family=Noto+Sans+Devanagari:wght@800&display=swap">
+<style>
+/* Layout: a five-chapter scroll story told in full-bleed colour takeovers (Nepal crimson, saffron, flag blue),
+   ultra-wide black capitals split across corners, halftone-printed frames and a rotating 3D phone. One deliberate look. */
+:root {
+  --cream: #F3EEE4;
+  --gold: #C99A3B;
+  --night: #121212;
+  --crimson: #DC143C;
+  --blood: #8E0E1E;
+  --saffron: #F2A33A;
+  --blue: #0B2A6B;
+  --ink: #121212;
+  --display: "Archivo", "Arial Black", Impact, sans-serif;
+  --body: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+  --brush: "Permanent Marker", "Comic Sans MS", cursive;
+  --gl: max(16px, env(safe-area-inset-left, 0px));
+  --gr: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--night); color: var(--cream); font: 300 17px/1.5 var(--body); overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 50; background: var(--navbg, var(--cream)); transition: background .4s; }
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--saffron); outline-offset: 3px; }
+.big { font-family: var(--display); font-weight: 900; font-stretch: 125%; text-transform: uppercase; line-height: .86; letter-spacing: -0.01em; text-wrap: balance; }
+.outline { color: transparent; -webkit-text-stroke: 2px currentColor; }
+.wrap { position: relative; max-width: 1240px; margin: 0 auto; padding-left: var(--gl); padding-right: var(--gr); }
+
+/* chapter nav */
+.nav { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 40; padding: 14px var(--gr) 14px var(--gl); display: flex; justify-content: space-between; gap: 8px; background: var(--navbg, var(--cream)); transition: background .4s; }
+.nav a { font: 900 11px/1 var(--display); font-stretch: 112%; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; color: var(--navoff, #8B7A5A); padding: 8px 0; transition: color .3s; }
+.nav a.on { color: var(--navon, var(--ink)); }
+@media (min-width: 700px) { .nav a { font-size: 13px; } }
+
+/* 0 · intro */
+.intro { background: var(--cream); color: var(--gold); height: 112svh; min-height: 640px; position: relative; overflow: hidden; }
+#flakes { position: absolute; inset: 0; width: 100%; height: 100%; }
+.intro .name { position: absolute; left: var(--gl); right: var(--gr); bottom: 28px; font-size: clamp(34px, 11.6vw, 168px); white-space: nowrap; }
+.intro .tag { position: absolute; left: var(--gl); bottom: calc(28px + clamp(34px, 11.6vw, 168px)); font: 600 12px var(--body); letter-spacing: .14em; text-transform: uppercase; color: #8B7A5A; padding-bottom: 12px; }
+
+/* shared chapter */
+.ch { position: relative; overflow: hidden; padding-block: 130px 90px; }
+.ch .corner-a { font-size: clamp(46px, 13vw, 170px); }
+.ch .corner-b { font-size: clamp(46px, 13vw, 170px); text-align: right; margin-left: auto; }
+.lede { font-size: clamp(20px, 2.6vw, 30px); line-height: 1.32; max-width: 22ch; }
+.rcopy { margin-left: auto; text-align: right; max-width: 34ch; font-size: 16px; line-height: 1.55; display: grid; gap: 14px; }
+.reveal .w { opacity: .18; transition: opacity .3s; }
+.reveal .w.lit { opacity: 1; }
+.frame { position: absolute; display: block; max-width: 46vw; height: auto; z-index: 1; }
+.brush { font-family: var(--brush); font-size: clamp(54px, 10vw, 130px); line-height: .9; transform: rotate(-9deg); position: absolute; opacity: .9; pointer-events: none; }
+.phone3d { width: 100%; height: clamp(380px, 62vw, 640px); display: block; }
+
+/* 1 · hero (night) */
+.hero { background: var(--night); color: var(--cream); padding-top: 150px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.hero h1 { font-size: clamp(48px, 8.5vw, 120px); }
+.hero .lede { margin-top: 34px; }
+.hero .stage { position: relative; }
+.hero .brush { color: var(--blood); left: -4%; top: 34%; z-index: 0; }
+.hero canvas { position: relative; z-index: 1; }
+@media (max-width: 780px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* 2 · tole (black with crimson print) */
+.tole { background: #140606; color: var(--crimson); }
+.tole .print { width: 100%; max-width: 760px; display: block; margin: 40px auto 0; height: auto; }
+.tole .rcopy { color: var(--cream); margin-top: 40px; }
+.tole .years { font-size: clamp(64px, 21vw, 300px); color: var(--cream); margin-top: 70px; line-height: .82; }
+
+/* 3 · search (crimson takeover) */
+.search { background: var(--blood); color: var(--cream); min-height: 1500px; }
+.search .corner-a { color: var(--night); }
+.search .corner-b { color: var(--night); }
+.search .frame-a { top: 300px; left: 34%; width: 340px; }
+.search .frame-b { top: 520px; right: -2%; width: 260px; }
+.search .frame-c { top: 980px; left: 4%; width: 300px; }
+.query { position: relative; z-index: 2; margin-top: 520px; display: grid; gap: 10px; max-width: 420px; }
+.qbar { background: var(--cream); color: var(--night); border-radius: 999px; padding: 14px 20px; font: 600 17px var(--body); display: flex; gap: 10px; align-items: center; }
+.qrow { background: rgba(0,0,0,.28); border-radius: 14px; padding: 12px 16px; font-size: 15px; display: flex; justify-content: space-between; gap: 10px; }
+.qrow.you { background: transparent; border: 1.5px dashed rgba(243,238,228,.45); }
+.search .rcopy { margin-top: 70px; position: relative; z-index: 2; }
+.search .zero { position: absolute; right: var(--gr); top: 120px; font-size: clamp(200px, 50vw, 600px); color: var(--crimson); opacity: .9; z-index: 0; }
+
+/* 4 · build (saffron takeover) */
+.build { background: var(--saffron); color: var(--night); }
+.build .num { position: absolute; top: -40px; right: var(--gr); font-size: clamp(160px, 40vw, 520px); color: var(--night); opacity: .9; }
+.build-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; margin-top: 30px; }
+.build .stage { position: relative; }
+.build .brush { color: #B86A0E; right: 2%; top: 12%; transform: rotate(-7deg); }
+.steps { display: grid; gap: 28px; }
+.step { border-top: 3px solid var(--night); padding-top: 12px; }
+.step b { font: 900 14px var(--display); font-stretch: 125%; text-transform: uppercase; letter-spacing: .04em; }
+.step p { margin-top: 6px; font-size: 16px; }
+.build .frame-d { position: relative; width: 260px; max-width: 70%; margin: 40px 0 0 auto; display: block; }
+@media (max-width: 780px) { .build-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* 5 · launch (flag blue takeover) */
+.launch { background: var(--blue); color: var(--cream); }
+.launch .corner-a, .launch .corner-b { color: var(--crimson); }
+.stats { margin-top: 70px; display: grid; gap: 54px; }
+.stat { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: end; border-bottom: 2px solid rgba(243,238,228,.25); padding-bottom: 24px; }
+.stat .v { font-size: clamp(72px, 17vw, 230px); }
+.stat .v.deva { font-family: "Noto Sans Devanagari", var(--display); font-weight: 800; letter-spacing: -0.02em; }
+.stat p { font-size: 16px; max-width: 30ch; justify-self: end; text-align: right; }
+.stat h3 { font: 900 15px var(--display); font-stretch: 125%; text-transform: uppercase; margin-bottom: 6px; letter-spacing: .03em; }
+@media (max-width: 640px) { .stat { grid-template-columns: minmax(0, 1fr); } .stat p { justify-self: start; text-align: left; } }
+
+/* 6 · sathi (cream) */
+.sathi { background: var(--cream); color: var(--night); }
+.sathi .corner-a { color: var(--crimson); }
+.sathi .corner-b { color: var(--night); }
+.svc { margin-top: 60px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--night); }
+.svc div { padding: 18px 20px 0 0; }
+.svc b { font: 900 16px var(--display); font-stretch: 125%; text-transform: uppercase; }
+.svc p { font-size: 15px; margin-top: 8px; }
+@media (max-width: 760px) { .svc { grid-template-columns: minmax(0, 1fr); gap: 18px; } }
+
+.plans { margin-top: 110px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.plan { padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 14px; min-height: 420px; }
+.plan h3 { font-size: clamp(34px, 4vw, 48px); }
+.plan .np { font: 800 16px "Noto Sans Devanagari", var(--body); opacity: .8; margin-top: -6px; }
+.plan .price { font: 900 26px var(--display); font-stretch: 112%; font-variant-numeric: tabular-nums; }
+.plan ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 15px; }
+.plan li::before { content: "— "; }
+.plan a { margin-top: auto; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px; font: 900 14px var(--display); font-stretch: 112%; text-transform: uppercase; text-decoration: none; letter-spacing: .04em; }
+.p1 { background: var(--night); color: var(--cream); } .p1 a { background: var(--cream); color: var(--night); }
+.p2 { background: var(--crimson); color: var(--cream); } .p2 a { background: var(--night); color: var(--cream); }
+.p3 { background: var(--saffron); color: var(--night); } .p3 a { background: var(--night); color: var(--saffron); }
+@media (max-width: 860px) { .plans { grid-template-columns: minmax(0, 1fr); } .plan { min-height: 0; } }
+
+.contact { margin-top: 120px; }
+.contact h2 { font-size: clamp(44px, 11vw, 150px); }
+.cgrid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--night); }
+.cgrid div { padding: 18px 20px 0 0; display: grid; gap: 8px; align-content: start; }
+.cgrid small { font: 900 11px var(--display); font-stretch: 125%; text-transform: uppercase; letter-spacing: .08em; color: #6B5D45; }
+.cgrid .val { font: 600 19px var(--body); user-select: all; overflow-wrap: anywhere; }
+.copy { justify-self: start; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--night); background: transparent; color: var(--night); font: 600 13px var(--body); cursor: pointer; }
+@media (max-width: 760px) { .cgrid { grid-template-columns: minmax(0, 1fr); gap: 22px; } }
+
+footer { background: var(--cream); color: var(--gold); overflow: hidden; padding: 60px var(--gr) 20px var(--gl); }
+footer .name { font-size: clamp(34px, 11.6vw, 168px); white-space: nowrap; }
+footer .fine { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: #6B5D45; font-size: 13px; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Chapters">
+  <a href="#tole" data-for="tole">Tole</a>
+  <a href="#search" data-for="search">Search</a>
+  <a href="#build" data-for="build">Build</a>
+  <a href="#launch" data-for="launch">Launch</a>
+  <a href="#sathi" data-for="sathi">Sathi</a>
+</nav>
+
+<main>
+  <!-- intro -->
+  <section class="intro" data-nav="#F3EEE4,#8B7A5A,#121212" aria-label="SiteSathi">
+    <canvas id="flakes" aria-hidden="true"></canvas>
+    <p class="tag">Websites for Nepali businesses · Kathmandu</p>
+    <h1 class="big name">SiteSathi</h1>
+  </section>
+
+  <!-- hero -->
+  <section class="ch hero" data-nav="#121212,#DC143C,#F3EEE4" aria-labelledby="h-hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h2 id="h-hero" class="big">Born to be found</h2>
+        <p class="lede reveal">From a shutter in your tole to the phone in every customer's pocket. We build websites for Nepali businesses that have earned their name and deserve to be seen.</p>
+      </div>
+      <div class="stage">
+        <span class="brush" aria-hidden="true">Kathmandu</span>
+        <canvas class="phone3d" id="phone-hero" aria-label="A phone showing the SiteSathi logo"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 tole -->
+  <section class="ch tole" id="tole" data-nav="#140606,#5E1220,#DC143C" aria-labelledby="h-tole">
+    <div class="wrap">
+      <h2 id="h-tole" class="big corner-a">The tole</h2>
+      <canvas class="print" id="print-shop" width="760" height="520" aria-label="Halftone print of a small shopfront"></canvas>
+      <div class="rcopy reveal">
+        <p>Didi opened her momo shop in Baneshwor in 2009. Everyone on the street knows the steam, the jhol and the queue at lunch.</p>
+        <p>That kind of reputation takes years. It also stops at the end of the street.</p>
+      </div>
+      <p class="big corner-b" style="margin-top:60px">Knows your name</p>
+      <p class="big outline years" aria-hidden="true">2009<br>2026</p>
+    </div>
+  </section>
+
+  <!-- 2 search -->
+  <section class="ch search" id="search" data-nav="#8E0E1E,#E4707E,#F3EEE4" aria-labelledby="h-search">
+    <p class="big outline zero" aria-hidden="true">0</p>
+    <canvas class="frame frame-a" id="print-phone" width="340" height="220" data-speed="-60" aria-hidden="true"></canvas>
+    <canvas class="frame frame-b" id="print-momo" width="260" height="320" data-speed="40" aria-hidden="true"></canvas>
+    <canvas class="frame frame-c" id="print-street" width="300" height="190" data-speed="-30" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <h2 id="h-search" class="big corner-a">The search</h2>
+      <div class="query" aria-label="Example phone search">
+        <div class="qbar"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>momo near me</div>
+        <div class="qrow"><span>Himalayan Momo House</span><span>Website</span></div>
+        <div class="qrow"><span>City Dumpling Co.</span><span>Website</span></div>
+        <div class="qrow you"><span>Didi's Momo</span><span>Not found</span></div>
+      </div>
+      <div class="rcopy reveal">
+        <p>A new customer arrives in Baneshwor and searches on their phone. They pick from whoever shows up, and walk past Didi's door.</p>
+        <p>Most people in Nepal now look things up on a phone first. No website, no menu, no map pin means no visit.</p>
+      </div>
+      <p class="big corner-b" style="margin-top:80px">And you're not there</p>
+    </div>
+  </section>
+
+  <!-- 3 build -->
+  <section class="ch build" id="build" data-nav="#F2A33A,#9A5B10,#121212" aria-labelledby="h-build">
+    <p class="big outline num" aria-hidden="true">03</p>
+    <div class="wrap">
+      <h2 id="h-build" class="big corner-a">We build</h2>
+      <div class="build-grid">
+        <div class="stage">
+          <span class="brush" aria-hidden="true">Didi's</span>
+          <canvas class="phone3d" id="phone-build" aria-label="A phone showing an example momo shop website building itself"></canvas>
+        </div>
+        <div class="steps">
+          <div class="step"><b>Your story</b><p>Name, place, years in business. The first thing a visitor sees.</p></div>
+          <div class="step"><b>One line that sells</b><p>We write the headline and choose colours that feel like your shop.</p></div>
+          <div class="step"><b>What you offer</b><p>Your real menu, services or prices, easy to update later.</p></div>
+          <div class="step"><b>One tap to reach you</b><p>Call, Viber, WhatsApp and Google Maps buttons made for thumbs.</p></div>
+          <canvas class="frame-d" id="print-hands" width="260" height="300" aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <p class="big corner-b" style="margin-top:80px">Your corner of the internet</p>
+    </div>
+  </section>
+
+  <!-- 4 launch -->
+  <section class="ch launch" id="launch" data-nav="#0B2A6B,#6E86C2,#F3EEE4" aria-labelledby="h-launch">
+    <div class="wrap">
+      <h2 id="h-launch" class="big corner-a">Live</h2>
+      <div class="stats">
+        <div class="stat"><p class="big v">24/7</p><div><h3>Always open</h3><p>Your website answers hours, prices and directions while the shutter is down.</p></div></div>
+        <div class="stat"><p class="big v deva">क<span style="font-family:var(--display);font-stretch:125%;font-weight:900"> A</span></p><div><h3>Nepali or English</h3><p>One language or both, written so it sounds like you and not like a translation.</p></div></div>
+        <div class="stat"><p class="big v">.np</p><div><h3>Your own address</h3><p>We help you get a .com.np or .com domain and set up your Google Maps listing.</p></div></div>
+      </div>
+      <p class="big corner-b" style="margin-top:80px">On every phone</p>
+    </div>
+  </section>
+
+  <!-- 5 sathi -->
+  <section class="ch sathi" id="sathi" data-nav="#F3EEE4,#B08E58,#DC143C" aria-labelledby="h-sathi">
+    <div class="wrap">
+      <h2 id="h-sathi" class="big corner-a">Sathi</h2>
+      <p class="big corner-b" style="margin-top:24px">Means friend</p>
+      <div class="svc">
+        <div><b>Updates by message</b><p>Send new prices or photos on Viber, WhatsApp or Instagram. We change the site.</p></div>
+        <div><b>Hosting handled</b><p>We keep it online, secure and renewed, so it never quietly disappears.</p></div>
+        <div><b>Local</b><p>Based in Kathmandu. Meet us, call us, pay in rupees.</p></div>
+      </div>
+
+      <div class="plans" aria-label="Packages">
+        <article class="plan p1">
+          <h3 class="big">Sajilo</h3><p class="np">सजिलो · easy</p>
+          <p class="price">Rs [PRICE]</p>
+          <ul><li>One-page website</li><li>Call, message and map buttons</li><li>Google Maps listing</li><li>Nepali or English</li></ul>
+          <a href="#contact">Ask about Sajilo</a>
+        </article>
+        <article class="plan p2">
+          <h3 class="big">Byapar</h3><p class="np">व्यापार · business</p>
+          <p class="price">Rs [PRICE]</p>
+          <ul><li>Up to 5 pages</li><li>Menu, services or price list</li><li>Photo gallery</li><li>Both languages</li><li>Updates for [X] months</li></ul>
+          <a href="#contact">Ask about Byapar</a>
+        </article>
+        <article class="plan p3">
+          <h3 class="big">Pasal</h3><p class="np">पसल · shop</p>
+          <p class="price">Rs [PRICE]</p>
+          <ul><li>Product catalogue</li><li>Order by message or form</li><li>eSewa / Khalti set-up</li><li>Training to add products</li></ul>
+          <a href="#contact">Ask about Pasal</a>
+        </article>
+      </div>
+
+      <div class="contact" id="contact">
+        <h2 class="big">Let's put you online</h2>
+        <div class="cgrid">
+          <div><small>Phone · Viber · WhatsApp</small><span class="val" id="v-phone">+977 [PHONE]</span><button class="copy" type="button" id="c-phone" data-copy="v-phone">Copy number</button></div>
+          <div><small>Email</small><span class="val" id="v-mail">hello@sitesathi.com.np</span><button class="copy" type="button" id="c-mail" data-copy="v-mail">Copy email</button></div>
+          <div><small>Instagram</small><span class="val" id="v-ig">@sitesathi</span><button class="copy" type="button" id="c-ig" data-copy="v-ig">Copy handle</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer data-nav="#F3EEE4,#8B7A5A,#121212">
+  <p class="big name" aria-hidden="true">SiteSathi</p>
+  <div class="fine"><span>© 2026 SiteSathi · Kathmandu, Nepal</span><span>Your business, online.</span></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var C = { cream: "#F3EEE4", gold: "#C99A3B", night: "#121212", crimson: "#DC143C", blood: "#8E0E1E", saffron: "#F2A33A", blue: "#0B2A6B" };
+
+  /* ---------- copy buttons ---------- */
+  document.querySelectorAll(".copy").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = document.getElementById(b.dataset.copy), label = b.textContent;
+      function done(t) { b.textContent = t; setTimeout(function () { b.textContent = label; }, 1600); }
+      function sel() { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); done("Selected"); }
+      try { navigator.clipboard.writeText(el.textContent.trim()).then(function () { done("Copied"); }, sel); } catch (e) { sel(); }
+    });
+  });
+
+  /* ---------- halftone prints ---------- */
+  function halftone(cv, paint, ink, paper, cell) {
+    var w = cv.width, h = cv.height, off = document.createElement("canvas");
+    off.width = w; off.height = h;
+    var o = off.getContext("2d");
+    o.fillStyle = "#000"; o.fillRect(0, 0, w, h);
+    paint(o, w, h);
+    var data = o.getImageData(0, 0, w, h).data, g = cv.getContext("2d");
+    g.fillStyle = paper; g.fillRect(0, 0, w, h); g.fillStyle = ink;
+    for (var y = cell / 2; y < h; y += cell) for (var x = cell / 2 + ((y / cell) % 2 ? cell / 2 : 0); x < w; x += cell) {
+      var i = ((y | 0) * w + (x | 0)) * 4, lum = (data[i] * .3 + data[i + 1] * .59 + data[i + 2] * .11) / 255;
+      var r = Math.sqrt(lum) * cell * .62;
+      if (r > .35) { g.beginPath(); g.arc(x, y, r, 0, 6.283); g.fill(); }
+    }
+  }
+  function glow(o, x, y, r, a) { var gr = o.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, "rgba(255,255,255," + a + ")"); gr.addColorStop(1, "rgba(255,255,255,0)"); o.fillStyle = gr; o.fillRect(x - r, y - r, r * 2, r * 2); }
+  var painters = {
+    shop: function (o, w, h) {
+      glow(o, w * .5, h * .55, w * .55, .35);
+      o.fillStyle = "#777"; o.fillRect(w * .12, h * .30, w * .76, h * .62);
+      for (var i = 0; i < 9; i++) { o.fillStyle = i % 2 ? "#fff" : "#bbb"; o.fillRect(w * .08 + i * w * .093, h * .2, w * .093, h * .12); o.beginPath(); o.arc(w * .08 + i * w * .093 + w * .0465, h * .32, w * .0465, 0, Math.PI); o.fill(); }
+      o.fillStyle = "#fff"; o.fillRect(w * .26, h * .06, w * .48, h * .1);
+      o.fillStyle = "#000"; o.font = "900 " + (h * .07) + "px Archivo, Arial Black"; o.textAlign = "center"; o.textBaseline = "middle"; o.fillText("MOMO", w * .5, h * .115);
+      o.fillStyle = "#222"; o.fillRect(w * .18, h * .45, w * .42, h * .3); o.fillRect(w * .66, h * .45, w * .16, h * .47);
+      glow(o, w * .39, h * .6, w * .18, .9);
+      o.fillStyle = "#eee"; o.beginPath(); o.ellipse(w * .39, h * .68, w * .14, h * .035, 0, 0, 6.283); o.fill();
+      for (var k = 0; k < 4; k++) { o.fillStyle = "#fff"; o.beginPath(); o.arc(w * (.31 + k * .055), h * .66, w * .028, Math.PI, 0); o.fill(); }
+      o.strokeStyle = "rgba(255,255,255,.7)"; o.lineWidth = 6; for (var s = 0; s < 3; s++) { o.beginPath(); o.moveTo(w * (.33 + s * .06), h * .6); o.bezierCurveTo(w * (.30 + s * .06), h * .54, w * (.37 + s * .06), h * .5, w * (.33 + s * .06), h * .44); o.stroke(); }
+      o.fillStyle = "#555"; o.fillRect(0, h * .92, w, h * .08);
+    },
+    phone: function (o, w, h) {
+      glow(o, w * .4, h * .5, w * .6, .5);
+      o.save(); o.translate(w * .55, h * .55); o.rotate(-.18);
+      o.fillStyle = "#222"; o.fillRect(-w * .2, -h * .62, w * .4, h * 1.2);
+      o.fillStyle = "#fff"; o.fillRect(-w * .17, -h * .55, w * .34, h * 1.05);
+      o.fillStyle = "#666"; o.fillRect(-w * .14, -h * .45, w * .28, h * .08);
+      for (var i = 0; i < 3; i++) { o.fillStyle = i === 2 ? "#ddd" : "#999"; o.fillRect(-w * .14, -h * .3 + i * h * .16, w * .28, h * .11); }
+      o.restore();
+      o.fillStyle = "#bbb"; o.beginPath(); o.ellipse(w * .3, h * .95, w * .22, h * .3, -.4, 0, 6.283); o.fill();
+    },
+    momo: function (o, w, h) {
+      glow(o, w * .5, h * .55, w * .7, .4);
+      o.fillStyle = "#888"; o.beginPath(); o.ellipse(w * .5, h * .7, w * .46, h * .17, 0, 0, 6.283); o.fill();
+      var pos = [[.3, .66], [.5, .62], [.7, .66], [.4, .74], [.6, .74]];
+      pos.forEach(function (p) { glow(o, w * p[0], h * p[1] - h * .03, w * .14, .9); o.fillStyle = "#ddd"; o.beginPath(); o.arc(w * p[0], h * p[1], w * .11, Math.PI, 0); o.fill(); o.strokeStyle = "#666"; o.lineWidth = 3; for (var k = -1; k <= 1; k++) { o.beginPath(); o.moveTo(w * p[0] + k * w * .03, h * p[1] - h * .07); o.lineTo(w * p[0] + k * w * .045, h * p[1]); o.stroke(); } });
+      o.strokeStyle = "rgba(255,255,255,.8)"; o.lineWidth = 8;
+      for (var s = 0; s < 3; s++) { o.beginPath(); o.moveTo(w * (.36 + s * .14), h * .5); o.bezierCurveTo(w * (.30 + s * .14), h * .38, w * (.44 + s * .14), h * .3, w * (.37 + s * .14), h * .14); o.stroke(); }
+    },
+    street: function (o, w, h) {
+      glow(o, w * .7, h * .2, w * .4, .8);
+      o.fillStyle = "#444"; o.beginPath(); o.moveTo(0, h); o.lineTo(w * .45, h * .45); o.lineTo(w * .55, h * .45); o.lineTo(w, h); o.fill();
+      for (var i = 0; i < 6; i++) { var x = i * w * .09, hh = h * (.35 + (i % 3) * .1); o.fillStyle = i % 2 ? "#999" : "#666"; o.fillRect(x, h * .55 - hh * .5, w * .08, hh); o.fillRect(w - x - w * .08, h * .55 - hh * .5, w * .08, hh); }
+      o.strokeStyle = "#ccc"; o.lineWidth = 3; o.beginPath(); o.moveTo(0, h * .2); o.quadraticCurveTo(w * .5, h * .35, w, h * .15); o.stroke();
+      ["#fff", "#aaa", "#ddd", "#888", "#eee", "#bbb", "#fff"].forEach(function (c, k) { o.fillStyle = c; var x = w * (.1 + k * .12), y = h * .2 + Math.sin(k) * h * .04 + k * h * .01; o.fillRect(x, y, w * .05, h * .1); });
+    },
+    hands: function (o, w, h) {
+      glow(o, w * .5, h * .4, w * .6, .6);
+      o.fillStyle = "#aaa"; o.beginPath(); o.ellipse(w * .5, h * .95, w * .38, h * .32, 0, 0, 6.283); o.fill();
+      o.fillStyle = "#222"; o.fillRect(w * .3, h * .12, w * .4, h * .62);
+      o.fillStyle = "#fff"; o.fillRect(w * .33, h * .16, w * .34, h * .54);
+      o.fillStyle = "#555"; o.fillRect(w * .36, h * .22, w * .28, h * .12);
+      o.fillStyle = "#999"; o.fillRect(w * .36, h * .38, w * .28, h * .03); o.fillRect(w * .36, h * .44, w * .2, h * .03);
+      o.fillStyle = "#ccc"; o.beginPath(); o.arc(w * .5, h * .6, w * .08, 0, 6.283); o.fill();
+      o.fillStyle = "#bbb"; o.beginPath(); o.ellipse(w * .3, h * .58, w * .07, h * .14, .3, 0, 6.283); o.fill();
+    }
+  };
+  function prints() {
+    halftone(document.getElementById("print-shop"), painters.shop, C.crimson, "#140606", 9);
+    halftone(document.getElementById("print-phone"), painters.phone, C.night, C.crimson, 7);
+    halftone(document.getElementById("print-momo"), painters.momo, C.cream, C.night, 7);
+    halftone(document.getElementById("print-street"), painters.street, C.night, "#E4707E", 6);
+    halftone(document.getElementById("print-hands"), painters.hands, C.night, "#F7C46E", 7);
+  }
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(prints);
+
+  /* ---------- word-by-word reveal ---------- */
+  document.querySelectorAll(".reveal").forEach(function (el) {
+    el.querySelectorAll("p").length ? el.querySelectorAll("p").forEach(split) : split(el);
+  });
+  function split(p) { p.innerHTML = p.textContent.trim().split(/\s+/).map(function (w) { return '<span class="w">' + w + "</span>"; }).join(" "); }
+  function lightWords() {
+    var vh = window.innerHeight;
+    document.querySelectorAll(".reveal .w").forEach(function (w) { var r = w.getBoundingClientRect(); w.classList.toggle("lit", reduce || r.top < vh * .82); });
+  }
+
+  /* ---------- nav colour + active chapter ---------- */
+  var navLinks = document.querySelectorAll(".nav a"), zones = document.querySelectorAll("[data-nav]"), root = document.documentElement.style;
+  function navState() {
+    var probe = 50, cur = null;
+    zones.forEach(function (z) { var r = z.getBoundingClientRect(); if (r.top <= probe && r.bottom > probe) cur = z; });
+    if (!cur) return;
+    var p = cur.dataset.nav.split(",");
+    root.setProperty("--navbg", p[0]); root.setProperty("--navoff", p[1]); root.setProperty("--navon", p[2]);
+    navLinks.forEach(function (a) { a.classList.toggle("on", a.dataset.for === cur.id); });
+  }
+  function onScroll() { navState(); lightWords(); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+  if (reduce) document.querySelectorAll(".reveal .w").forEach(function (w) { w.classList.add("lit"); });
+
+  /* ---------- intro: gold flake sphere ---------- */
+  (function () {
+    var cv = document.getElementById("flakes"), g = cv.getContext("2d"), N = 900, pts = [], dpr = Math.min(2, window.devicePixelRatio || 1), W, H, scatter = 0, t0 = performance.now(), on = true;
+    var golds = ["#C99A3B", "#E3BF6A", "#B58428", "#D9AE55", "#F2D48E"];
+    for (var i = 0; i < N; i++) {
+      var y = 1 - (i / (N - 1)) * 2, rad = Math.sqrt(1 - y * y), th = i * 2.39996;
+      pts.push({ x: Math.cos(th) * rad, y: y, z: Math.sin(th) * rad, s: 2 + Math.random() * 5, a: Math.random() * 6.28, c: golds[i % golds.length], dx: Math.random() - .5, dy: Math.random() - .5, j: .85 + Math.random() * .3 });
+    }
+    function size() { var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; }
+    function draw(now) {
+      var t = reduce ? 0 : (now - t0) / 1000, R = Math.min(W, H) * .3, cx = W / 2, cy = H * .42;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+      var ca = Math.cos(t * .25), sa = Math.sin(t * .25);
+      for (var i = 0; i < N; i++) {
+        var p = pts[i], x = p.x * ca - p.z * sa, z = p.x * sa + p.z * ca, k = 1 + scatter * 3.2 * p.j;
+        var px = cx + (x * k + p.dx * scatter * 2) * R, py = cy + (p.y * k + p.dy * scatter * 2) * R + scatter * scatter * H * .3;
+        var depth = (z + 1.6) / 2.6;
+        g.globalAlpha = (.35 + .65 * depth) * (1 - scatter * .55);
+        g.fillStyle = p.c;
+        g.save(); g.translate(px, py); g.rotate(p.a + t * .6 * p.dx); g.fillRect(-p.s * depth / 2, -p.s * .35 * depth, p.s * depth, p.s * .7 * depth); g.restore();
+      }
+      g.globalAlpha = 1;
+      if (on && !reduce) requestAnimationFrame(draw);
+    }
+    size(); window.addEventListener("resize", size);
+    window.addEventListener("scroll", function () {
+      var r = cv.getBoundingClientRect(); scatter = Math.min(1, Math.max(0, -r.top / (r.height * .8)));
+      var vis = r.bottom > 0; if (vis && !on) { on = true; requestAnimationFrame(draw); } on = vis;
+      if (reduce) requestAnimationFrame(draw);
+    }, { passive: true });
+    requestAnimationFrame(draw);
+  })();
+
+  /* ---------- 3D phones ---------- */
+  function rr(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  function screenLogo(g, w, h) {
+    g.fillStyle = "#13233F"; g.fillRect(0, 0, w, h);
+    g.save(); g.translate(w / 2 - 110, h * .34); g.lineWidth = 16; g.strokeStyle = C.saffron;
+    rr(g, 0, 0, 220, 176, 34); g.stroke(); g.beginPath(); g.moveTo(0, 50); g.lineTo(220, 50); g.stroke();
+    g.fillStyle = C.saffron; g.beginPath(); g.arc(34, 25, 9, 0, 6.283); g.arc(62, 25, 9, 0, 6.283); g.fill();
+    g.strokeStyle = "#fff"; g.lineCap = "round"; g.beginPath(); g.moveTo(66, 92); g.quadraticCurveTo(110, 140, 154, 92); g.stroke(); g.restore();
+    g.textAlign = "center"; g.fillStyle = "#fff"; g.font = "900 64px Archivo, Arial Black"; g.fillText("Site", w / 2 - 70, h * .66); g.fillStyle = C.saffron; g.fillText("Sathi", w / 2 + 92, h * .66);
+    g.fillStyle = "#A9B5C9"; g.font = "400 30px Sora, sans-serif"; g.fillText("Your business, online.", w / 2, h * .72);
+  }
+  function screenSite(g, w, h, step) {
+    g.fillStyle = C.cream; g.fillRect(0, 0, w, h);
+    var a = function (n) { return step >= n ? 1 : .08; };
+    g.textAlign = "left";
+    g.globalAlpha = a(1); g.fillStyle = C.night; g.font = "900 58px Archivo, Arial Black"; g.fillText("Didi's Momo", 44, 130);
+    g.fillStyle = "#5B6475"; g.font = "400 28px Sora, sans-serif"; g.fillText("Since 2009 · Baneshwor", 44, 176);
+    g.globalAlpha = a(2); g.fillStyle = "#13233F"; rr(g, 44, 220, w - 88, 300, 30); g.fill();
+    g.fillStyle = "#fff"; g.font = "900 54px Archivo, Arial Black"; g.fillText("Fresh momo,", 80, 350); g.fillStyle = C.saffron; g.fillText("every day.", 80, 418);
+    g.globalAlpha = a(3); g.font = "600 32px Sora, sans-serif";
+    [["Buff Momo", "Rs 180"], ["Chicken Jhol Momo", "Rs 220"], ["Veg C-Momo", "Rs 200"]].forEach(function (r, i) {
+      var y = 610 + i * 86; g.fillStyle = C.night; g.textAlign = "left"; g.fillText(r[0], 44, y); g.textAlign = "right"; g.fillStyle = "#5B6475"; g.fillText(r[1], w - 44, y);
+      if (i < 2) { g.fillStyle = "#E2DDD3"; g.fillRect(44, y + 30, w - 88, 3); }
+    });
+    g.globalAlpha = a(4); g.fillStyle = C.saffron; rr(g, 44, 880, w - 88, 104, 52); g.fill();
+    g.fillStyle = C.night; g.textAlign = "center"; g.font = "900 36px Archivo, Arial Black"; g.fillText("CALL TO ORDER", w / 2, 946);
+    g.fillStyle = "#5B6475"; g.font = "400 26px Sora, sans-serif"; g.fillText("Open 10am – 9pm · Directions", w / 2, 1040);
+    g.globalAlpha = 1;
+  }
+  function phone(canvasId, paint, colour, trigger) {
+    var cv = document.getElementById(canvasId);
+    if (!window.THREE || !cv) return;
+    var renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    var scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(30, 1, .1, 100);
+    cam.position.set(0, 0, 15);
+    scene.add(new THREE.AmbientLight(0xffffff, .55));
+    var key = new THREE.DirectionalLight(0xffffff, .9); key.position.set(4, 6, 8); scene.add(key);
+    var rim = new THREE.DirectionalLight(0xffffff, .5); rim.position.set(-6, -2, -4); scene.add(rim);
+    var sc = document.createElement("canvas"); sc.width = 540; sc.height = 1100;
+    var tex = new THREE.CanvasTexture(sc); tex.anisotropy = 4;
+    var group = new THREE.Group();
+    var body = new THREE.Mesh(new THREE.BoxGeometry(3.1, 6.3, .34), new THREE.MeshStandardMaterial({ color: colour, roughness: .35, metalness: .4 }));
+    var face = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 5.98), new THREE.MeshBasicMaterial({ map: tex }));
+    face.position.z = .175;
+    var notch = new THREE.Mesh(new THREE.PlaneGeometry(.8, .16), new THREE.MeshBasicMaterial({ color: 0x0a0a0a }));
+    notch.position.set(0, 2.8, .18);
+    group.add(body, face, notch); scene.add(group);
+    var progress = 0, last = -1, visible = true;
+    function redraw() { var step = Math.floor(progress * 5.2); if (step === last) return; last = step; paint(sc.getContext("2d"), sc.width, sc.height, step); tex.needsUpdate = true; }
+    function resize() { var r = cv.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); cam.aspect = r.width / Math.max(1, r.height); cam.position.z = cam.aspect < .75 ? 17 : 15; cam.updateProjectionMatrix(); }
+    function frame(now) {
+      var t = reduce ? 0 : now / 1000;
+      group.rotation.y = -.55 + progress * Math.PI * 1.1 + Math.sin(t * .8) * .08;
+      group.rotation.x = .08 + Math.sin(t * .6) * .04;
+      group.position.y = Math.sin(t * 1.1) * .12;
+      renderer.render(scene, cam);
+      if (visible) requestAnimationFrame(frame);
+    }
+    window.addEventListener("resize", resize);
+    window.addEventListener("scroll", function () {
+      var host = document.querySelector(trigger), r = host.getBoundingClientRect(), vh = window.innerHeight;
+      progress = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh * .2)));
+      redraw();
+      var vis = r.bottom > 0 && r.top < vh; if (vis && !visible) { visible = true; requestAnimationFrame(frame); } visible = vis;
+    }, { passive: true });
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () { last = -1; redraw(); });
+    resize(); redraw(); requestAnimationFrame(frame);
+  }
+  phone("phone-hero", function (g, w, h) { screenLogo(g, w, h); }, 0x1b1b1b, ".hero");
+  phone("phone-build", function (g, w, h, step) { screenSite(g, w, h, reduce ? 9 : step); }, 0x13233F, ".build");
+
+  /* ---------- GSAP motion ---------- */
+  if (!window.gsap || reduce) return;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray(".corner-a").forEach(function (el) {
+    gsap.fromTo(el, { xPercent: -6 }, { xPercent: 4, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } });
+  });
+  gsap.utils.toArray(".corner-b").forEach(function (el) {
+    gsap.fromTo(el, { xPercent: 6 }, { xPercent: -3, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } });
+  });
+  gsap.utils.toArray("[data-speed]").forEach(function (el) {
+    gsap.to(el, { y: Number(el.dataset.speed) * 3, ease: "none", scrollTrigger: { trigger: el.closest("section"), start: "top bottom", end: "bottom top", scrub: true } });
+  });
+  gsap.to(".tole .years", { xPercent: -14, ease: "none", scrollTrigger: { trigger: ".tole .years", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.to(".search .zero", { yPercent: 30, ease: "none", scrollTrigger: { trigger: ".search", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.to(".build .num", { yPercent: 40, ease: "none", scrollTrigger: { trigger: ".build", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.utils.toArray(".stat .v").forEach(function (el) {
+    gsap.fromTo(el, { xPercent: -8 }, { xPercent: 0, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "top 50%", scrub: true } });
+  });
+  gsap.from(".hero h2", { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".hero", start: "top 70%" } });
+})();
+</script>
+
+</body>
+</html>
